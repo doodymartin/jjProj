@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.jjProj.service"/>
+
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:atmEngine.properties" />
+    </bean>
+
+    <bean id="taskExecutor"
+        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="${corePoolSize}" />
+        <property name="maxPoolSize" value="${maxPoolSize}" />
+        <property name="queueCapacity" value="${queueCapacity}" />
+        <property name="WaitForTasksToCompleteOnShutdown" value="true" />
+    </bean>
+
+    <bean name="atmEngine" class="com.jjProj.atmProcessingEngine.AtmEngine">
+    </bean>
+
+    <bean name="atmEngineFactory" class="com.jjProj.atmProcessingEngine.AtmEngineFactory">
+        <constructor-arg type="org.springframework.core.task.TaskExecutor"  ref="taskExecutor" />
+        <constructor-arg type="com.jjProj.atmProcessingEngine.AtmEngine" ref="atmEngine" />
+        <constructor-arg type="java.lang.String" value="${atmMachineName}" />
+    </bean>
+
+</beans>
