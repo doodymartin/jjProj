@@ -105,15 +105,23 @@ spring-core-4.2.3.RELEASE.jar
 spring-expression-4.2.3.RELEASE.jar
 spring-test-4.2.3.RELEASE.jar
 
+-------------------------------------------
+Tests / Business requirement Validation
+-------------------------------------------
+The application uses Junit test cases to validate the application.
 
-----------------------------------
-Tests
-----------------------------------
+Please see the test input data files @ /src/test/resources/*.data in the code base for the Junit test case 
+inputs that validates the applacation operation.
+
+The Junit test case testprocessInputFile_ATM_data_test_OK_1() in "AtmEngineServiceImplTest.java" validates the application 
+against the ATM_data_test_OK_1.data file which is the input test data procesed by the application specification.
+
+The application currently has a line coverage of 78% for it's Junit test cases.
 
 -------------------------
 Performance & Profiling 
 -------------------------
-Not performed
+Not performed.
 
 ----------------------------------
 License
