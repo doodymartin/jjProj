@@ -47,11 +47,12 @@ mvn clean install
 -------------------------------------
 Running ATM Machine from command line
 -------------------------------------
-To run the application you can use the Java virtual machine to run the executable jar as below.
+To run the application you can use the Java virtual machine to run the executable jar as below. The executable jar can be placed 
+into any directory location where is can create it's own directories and files.
 
 java -jar atmMachine-1.0-SNAPSHOT.jar
 
-The application will always create the data processing directories below.
+The application will always create the data processing directories below at the same level as the executable jar.
 -input 
 -output 
 -processed 
@@ -66,6 +67,8 @@ taken for inspection.
 ----------------------
 Command Line Arguments
 ----------------------
+The application has 2 optional commnad line arguments.
+
 -file <file name>
 (optional) Specify Path to single file to process. If this option if specified then the this will be the only file processed
 by the application, any data files in the input directory will not be processed. The file specifies here does not need to be 
@@ -111,10 +114,10 @@ Tests / Business requirement Validation
 The application uses Junit test cases to validate the application.
 
 Please see the test input data files @ /src/test/resources/*.data in the code base for the Junit test case 
-inputs that validates the applacation operation.
+inputs that validate the applacation's operation. Junit test cases validate that each test input file produces the required output. 
 
-The Junit test case testprocessInputFile_ATM_data_test_OK_1() in "AtmEngineServiceImplTest.java" validates the application 
-against the ATM_data_test_OK_1.data file which is the input test data procesed by the application specification.
+The Junit test case "testprocessInputFile_ATM_data_test_OK_1()" in "AtmEngineServiceImplTest.java" validates the application 
+against the "ATM_data_test_OK_1.data" file which is the input test data provided in the requirements specification.
 
 The application currently has a line coverage of 78% for it's Junit test cases.
 
