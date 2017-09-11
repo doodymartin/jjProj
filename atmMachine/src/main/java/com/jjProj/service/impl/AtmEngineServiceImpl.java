@@ -45,7 +45,8 @@ public class AtmEngineServiceImpl implements AtmEngineService{
         boolean validateInputFileSuccess = false;
         if(atmEngineFilePathToProcess != null && !atmEngineFilePathToProcess.isEmpty()){
             File newAtmEngineFilePathToProcess = new File(atmEngineFilePathToProcess);
-            if (newAtmEngineFilePathToProcess.isFile()) {
+            if (newAtmEngineFilePathToProcess.isFile() &&
+                    newAtmEngineFilePathToProcess.getName().endsWith(AtmEngineConstants.ATM_MACHINE_INPUT_FILE_EXTENSION_ID)) {
                 validateInputFileSuccess = true;
             }
         }
@@ -273,7 +274,9 @@ public class AtmEngineServiceImpl implements AtmEngineService{
          * If the file already exists in the processed directory then the renameTo()
          * call will return false and the file will not be copied over.
          */
-        if (atmEngineConfig.getInputFile().isFile() && atmEngineConfig.isMoveInputAtmTransactionFileToProcessed()) {
+        if ((atmEngineConfig.getInputFile() != null) &&
+                 atmEngineConfig.getInputFile().isFile() &&
+                 atmEngineConfig.isMoveInputAtmTransactionFileToProcessed()) {
 
             /**
              * If the file already exists in the processed directory then delete it first

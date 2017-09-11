@@ -155,6 +155,7 @@ public class AtmMachineServiceImpl implements AtmMachineService{
      */
     public boolean fireThreadPerInputFile(AtmEngineFactory atmEngineFactory, AtmMachineConfig atmMachineConfig){
         boolean result = true;
+        FilenameFilter atmMachineFileFilter =  getAtmMachineInputFileFilter();
         /**
          * If the user has specified a single ATM transaction file to process
          * then only process that single file and exit the ATM Machine application
@@ -163,7 +164,6 @@ public class AtmMachineServiceImpl implements AtmMachineService{
             AtmEngineConfig atmEngineConfig = new AtmEngineConfig(atmMachineConfig,atmMachineConfig.getSingleFilePathForProcessing());
             atmEngineFactory.fire(atmEngineConfig);
         } else{
-            FilenameFilter atmMachineFileFilter =  getAtmMachineInputFileFilter();
             File atmMachineInputDirectory = new File (atmMachineConfig.getAtmMachineBaseDirectory()+ "/" + AtmEngineConstants.ATM_MACHINE_INPUT_ID_NAME);
             for (File atmTransactionFile : atmMachineInputDirectory.listFiles(atmMachineFileFilter)) {
                 if (atmTransactionFile.isFile()) {
