@@ -274,7 +274,15 @@ public class AtmEngineServiceImpl implements AtmEngineService{
          * call will return false and the file will not be copied over.
          */
         if (atmEngineConfig.getInputFile().isFile() && atmEngineConfig.isMoveInputAtmTransactionFileToProcessed()) {
-            if (!atmEngineConfig.getInputFile().renameTo(atmEngineConfig.getProcessedFile())){
+
+            /**
+             * If the file already exists in the processed directory then delete it first
+             */
+            if (atmEngineConfig.getProcessedFile().isFile()){
+                atmEngineCleanUpSuccess = atmEngineConfig.getProcessedFile().delete();
+            }
+            if (atmEngineCleanUpSuccess &&
+                    !atmEngineConfig.getInputFile().renameTo(atmEngineConfig.getProcessedFile())){
                 System.out.println( "INFO: File already exists in the processed directory ["+atmEngineConfig.getProcessedFile().getAbsolutePath()+"]");
             }
         }
