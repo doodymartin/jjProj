@@ -65,7 +65,6 @@ public class AtmEngineServiceImpl implements AtmEngineService{
         String atmEngineFilePathToProcess = atmEngineConfig.getAtmEngineFilePathToProcess();
         boolean processInputFileSuccess = false;
         boolean readFirstLine = false;
-        int atmBalance = 0;
         int linesRead = 0;
         int customerTransProcessed = 0;
         String line = null;
@@ -101,7 +100,7 @@ public class AtmEngineServiceImpl implements AtmEngineService{
              */
             String firstLine = this.getBufferedReader().readLine();
             try {
-                atmBalance = Integer.parseInt(firstLine.trim());
+                atmEngineConfig.setAtmMachineBalance(Integer.parseInt(firstLine.trim()));
                 readFirstLine = true;
                 linesRead++;
             } catch(NumberFormatException nfe) {
@@ -118,7 +117,7 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                          * process the customer transaction lines that we have just read in
                          */
                         if(transactionLines.size() > 0) {
-                            if(processCustomerAtmTransaction(this.getBufferedWriter(), atmBalance, transactionLines)){
+                            if(processCustomerAtmTransaction(this.getBufferedWriter(), atmEngineConfig, transactionLines)){
                                 customerTransProcessed++;
                             } else {
                                 System.out.println("ERROR: Failed to process customer transaction in["+atmEngineFilePathToProcess+"]");
@@ -134,7 +133,7 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                     linesRead++;
                 }
                 if(transactionLines.size() > 0) {
-                    if(processCustomerAtmTransaction(this.getBufferedWriter(), atmBalance, transactionLines)){
+                    if(processCustomerAtmTransaction(this.getBufferedWriter(), atmEngineConfig, transactionLines)){
                         customerTransProcessed++;
                     } else {
                         System.out.println("ERROR: Failed to process customer transaction in["+atmEngineFilePathToProcess+"]");
@@ -183,11 +182,11 @@ public class AtmEngineServiceImpl implements AtmEngineService{
      * transactions for a particular customer.
      *
      * @param BufferedWriter - The output file writer to use for output while processging the transaction
-     * @param int - The ATM balance read in from the input file
+     * @param AtmEngineConfig - The ATM Machine config
      * @param List<String> - The lines read in from input file for this customer transaction
      * @return boolean - success or failure of processing
      */
-    private boolean processCustomerAtmTransaction(BufferedWriter bufferedWriter, int atmBalance, List<String> transactionLines){
+    private boolean processCustomerAtmTransaction(BufferedWriter bufferedWriter, AtmEngineConfig atmEngineConfig, List<String> transactionLines){
 
         boolean processCustomerAtmTransactionSuccess = true;
         AtmTransaction atmTransaction = new AtmTransaction();
@@ -228,58 +227,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                         transactionLines.remove(0);
                         transactionLines.remove(0);
 
-                        for (String line:transactionLines){
-                            String[] transaction = line.split(" ");
-                            if (transaction.length == 1){
-                                if (AtmEngineConstants.ATM_CUSTOMER_BALANCE_TRANSACTION_ID.equals(transaction[0])){
-                                    writeToOutputFile(bufferedWriter, String.valueOf(atmTransaction.getBalanceAmount()));
-                                } else {
-                                    System.out.println( "ERROR: Customer transction should be a Balance but is not["+transaction[0]+"]");
-                                }
-                            } else if(transaction.length == 2){
-                                if (AtmEngineConstants.ATM_CUSTOMER_WITHDRAWL_TRANSACTION_ID.equals(transaction[0])){
-
-                                    int withdrawal =0;
-                                    int customerAvailableBalance = atmTransaction.getBalanceAmount() + atmTransaction.getOverdraftAmount();
-                                    if((withdrawal = validateAmount(transaction[1])) != -1){
-                                        if(((atmBalance - withdrawal) >=0) && atmBalance != 0){
-                                            atmBalance = (atmBalance-withdrawal);
-                                            if((customerAvailableBalance - withdrawal) >=0 ){
-                                                int debitOverdraftAmount = (atmTransaction.getBalanceAmount() - withdrawal);
-                                                if (debitOverdraftAmount < 0){
-                                                    debitOverdraftAmount = -debitOverdraftAmount;
-                                                    atmTransaction.setOverdraftAmount((atmTransaction.getOverdraftAmount() - debitOverdraftAmount));
-                                                    atmTransaction.setBalanceAmount(0);
-                                                } else {
-                                                    atmTransaction.setBalanceAmount((atmTransaction.getBalanceAmount() - withdrawal));
-                                                    /**
-                                                     * just in case ensure that the ATM balance never goes below zero!!
-                                                     */
-                                                    if (atmTransaction.getBalanceAmount() <0){
-                                                        atmTransaction.setBalanceAmount(0);
-                                                    }
-                                                }
-                                                writeToOutputFile(bufferedWriter, String.valueOf(atmTransaction.getBalanceAmount()));
-                                            } else {
-                                                writeToOutputFile(bufferedWriter, AtmMachineError.FUNDS_ERR.toString());
-//                                                System.out.println( "ERROR: Customer withdrawal Insufficient funds");
-                                            }
-                                        } else {
-                                            writeToOutputFile(bufferedWriter, AtmMachineError.ATM_ERR.toString());
-//                                            System.out.println( "ERROR: ATM Machine Insufficient funds");
-                                        }
-                                    } else {
-                                        System.out.println( "ERROR: Invalid withdrawal amount in transaction");
-                                    }
-                                } else {
-                                    System.out.println( "ERROR: Customer transction should be a Withdrawal but is not ["+transaction[0]+"]");
-                                }
-                            }  else {
-                                System.out.println( "ERROR: Invalid input.");
-                                processCustomerAtmTransactionSuccess = false;
-                                break;
-                            }
+                        if (!processTransactionLines(transactionLines, atmTransaction, atmEngineConfig)){
+                            processCustomerAtmTransactionSuccess = false;
                         }
+
                     } else {
                         System.out.println( "ERROR: Invalid Customer Balance amounts in transaction");
                         processCustomerAtmTransactionSuccess = false;
@@ -299,25 +250,6 @@ public class AtmEngineServiceImpl implements AtmEngineService{
         return processCustomerAtmTransactionSuccess;
     }
 
-    /**
-     * This method is used to convert a String to an Integer.
-     *
-     * @param String - The String input amount to be converted to an int
-     * @return int - the amount converted from a string
-     */
-    private int validateAmount(String inputAmount){
-        int amount = -1;
-        try {
-            /**
-             * TODO: We should be using something like a double instead of on int to handle fractions in our customer account.
-             */
-            amount = Integer.parseInt(inputAmount.trim());
-        } catch(Exception e) {
-            System.out.println( "ERROR: Failed to validate Customer Amount Balance");
-            amount = -1;
-        }
-        return amount;
-    }
 
     /**
      * TODO: We need to find a better solution to move and delete file as some of these Java operations
@@ -412,6 +344,97 @@ public class AtmEngineServiceImpl implements AtmEngineService{
         return true;
     }
 
+    /**
+     * This method is used to process the Transaction lines that were read in that conatain
+     * a particular set of Customer operations.
+     *
+     * @param List<String> - The list of lines in the transaction
+     * @param AtmTransaction - The ATM transaction object
+     * @param AtmEngineConfig - The ATM Machine config
+     * @return boolean - success or failure of processing
+     */
+    private boolean processTransactionLines(List<String> transactionLines,AtmTransaction atmTransaction, AtmEngineConfig atmEngineConfig){
+        boolean result = true;
+
+        for (String line:transactionLines){
+            String[] transaction = line.split(" ");
+
+            if (transaction.length == 1){
+                if (AtmEngineConstants.ATM_CUSTOMER_BALANCE_TRANSACTION_ID.equals(transaction[0])){
+                    writeToOutputFile(bufferedWriter, String.valueOf(atmTransaction.getBalanceAmount()));
+                } else {
+                    System.out.println( "ERROR: Customer transction should be a Balance but is not["+transaction[0]+"]");
+                }
+            } else if(transaction.length == 2){
+                if (AtmEngineConstants.ATM_CUSTOMER_WITHDRAWL_TRANSACTION_ID.equals(transaction[0])){
+
+                    int withdrawal =0;
+                    int customerAvailableBalance = atmTransaction.getBalanceAmount() + atmTransaction.getOverdraftAmount();
+                    if((withdrawal = validateAmount(transaction[1])) != -1){
+                        if(((atmEngineConfig.getAtmMachineBalance() - withdrawal) >=0) && atmEngineConfig.getAtmMachineBalance() != 0){
+                            atmEngineConfig.setAtmMachineBalance(atmEngineConfig.getAtmMachineBalance()-withdrawal);
+                            if((customerAvailableBalance - withdrawal) >=0 ){
+                                int debitOverdraftAmount = (atmTransaction.getBalanceAmount() - withdrawal);
+                                if (debitOverdraftAmount < 0){
+                                    debitOverdraftAmount = -debitOverdraftAmount;
+                                    atmTransaction.setOverdraftAmount((atmTransaction.getOverdraftAmount() - debitOverdraftAmount));
+                                    atmTransaction.setBalanceAmount(0);
+                                } else {
+                                    atmTransaction.setBalanceAmount((atmTransaction.getBalanceAmount() - withdrawal));
+                                    /**
+                                     * just in case ensure that the ATM balance never goes below zero!!
+                                     */
+                                    if (atmTransaction.getBalanceAmount() <0){
+                                        atmTransaction.setBalanceAmount(0);
+                                    }
+                                }
+                                writeToOutputFile(bufferedWriter, String.valueOf(atmTransaction.getBalanceAmount()));
+                            } else {
+                                writeToOutputFile(bufferedWriter, AtmMachineError.FUNDS_ERR.toString());
+                            }
+                        } else {
+                            writeToOutputFile(bufferedWriter, AtmMachineError.ATM_ERR.toString());
+                        }
+                    } else {
+                        System.out.println( "ERROR: Invalid withdrawal amount in transaction");
+                    }
+                } else {
+                    System.out.println( "ERROR: Customer transction should be a Withdrawal but is not ["+transaction[0]+"]");
+                }
+            }  else {
+                System.out.println( "ERROR: Invalid input.");
+                /**
+                 * TODO: Should we stop if we detect input file errors.
+                 *
+                 * Here we are just allowing the processing to continue
+                 */
+//                result = false;
+//                break;
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     * This method is used to convert a String to an Integer.
+     *
+     * @param String - The String input amount to be converted to an int
+     * @return int - the amount converted from a string
+     */
+    private int validateAmount(String inputAmount){
+        int amount = -1;
+        try {
+            /**
+             * TODO: We should be using something like a double instead of on int to handle fractions in our customer account.
+             */
+            amount = Integer.parseInt(inputAmount.trim());
+        } catch(Exception e) {
+            System.out.println( "ERROR: Failed to validate Customer Amount Balance");
+            amount = -1;
+        }
+        return amount;
+    }
 
     public FileReader getFileReader() {
         return fileReader;

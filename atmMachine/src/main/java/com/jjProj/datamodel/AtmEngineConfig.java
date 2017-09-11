@@ -12,6 +12,7 @@ import java.io.File;
  */
 public class AtmEngineConfig extends AtmMachineConfig{
 
+    int atmMachineBalance;
     String atmEngineFilePathToProcess;
     File inputFile;
     File outputFile;
@@ -58,6 +59,14 @@ public class AtmEngineConfig extends AtmMachineConfig{
 
     public void setProcessedFile(File processedFile) {
         ProcessedFile = processedFile;
+    }
+
+    public int getAtmMachineBalance() {
+        return atmMachineBalance;
+    }
+
+    public void setAtmMachineBalance(int atmMachineBalance) {
+        this.atmMachineBalance = atmMachineBalance;
     }
 
 

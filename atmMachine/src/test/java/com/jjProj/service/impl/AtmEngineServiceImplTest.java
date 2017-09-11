@@ -8,6 +8,7 @@ package com.jjProj.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +26,7 @@ import org.junit.Test;
 import org.powermock.reflect.Whitebox;
 import com.jjProj.datamodel.AtmEngineConfig;
 import com.jjProj.datamodel.AtmMachineConfig;
+
 
 public class AtmEngineServiceImplTest {
 
@@ -221,6 +223,63 @@ public class AtmEngineServiceImplTest {
         }
     }
 
+    @Test
+    public void testprocessInputFile_ATM_data_test_TX_ERR_1() {
+
+        String basicTestFile = "Atm_data_test_TX_ERR_1";
+        String testInFileLocal = currentCirectory +"\\src\\test\\resources\\"+basicTestFile+extension;
+        File testInFileObjectLocal = new File(testInFileLocal);
+
+        AtmEngineConfig atmEngineConfig = createAtmEngineConfig(currentCirectory,
+                false,
+                null,
+                testInFileLocal);
+
+        atmEngineConfig.setInputFile(testInFileObjectLocal);
+        atmEngineConfig.setOutputFile(testOutFileObject);
+        atmEngineConfig.setProcessedFile(testProcessedFileObject);
+        try{
+
+            bufferedReader = new BufferedReader(new FileReader(testInFileLocal));
+            boolean result = atmEngineService.processInputFile(atmEngineConfig);
+            List<String> expectedLines =  Arrays.asList("6667","6567","6565");
+            validateOutputFileAgainstExpected(expectedLines);
+
+            assertEquals(result, true);
+        } catch(Exception e){
+            System.out.print(e);
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testprocessInputFile_ATM_data_test_TX_BAD_INT() {
+
+        String basicTestFile = "Atm_data_test_TX_BAD_INT";
+        String testInFileLocal = currentCirectory +"\\src\\test\\resources\\"+basicTestFile+extension;
+        File testInFileObjectLocal = new File(testInFileLocal);
+
+        AtmEngineConfig atmEngineConfig = createAtmEngineConfig(currentCirectory,
+                false,
+                null,
+                testInFileLocal);
+
+        atmEngineConfig.setInputFile(testInFileObjectLocal);
+        atmEngineConfig.setOutputFile(testOutFileObject);
+        atmEngineConfig.setProcessedFile(testProcessedFileObject);
+        try{
+
+            bufferedReader = new BufferedReader(new FileReader(testInFileLocal));
+            boolean result = atmEngineService.processInputFile(atmEngineConfig);
+            List<String> expectedLines =  Arrays.asList("6667","6567","6565");
+            validateOutputFileAgainstExpected(expectedLines);
+
+            assertEquals(result, true);
+        } catch(Exception e){
+            System.out.print(e);
+            Assert.fail();
+        }
+    }
 
     @Test
     public void testprocessInputFile_ATM_data_test_ATM_ERR() {
@@ -244,7 +303,7 @@ public class AtmEngineServiceImplTest {
 
             boolean result = atmEngineService.processInputFile(atmEngineConfig);
 
-            List<String> expectedLines =  Arrays.asList("500", "400", "ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR", "ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR");
+            List<String> expectedLines =  Arrays.asList("500", "400", "ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR", "ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","ATM_ERR","500","ATM_ERR");
             validateOutputFileAgainstExpected(expectedLines);
 
             assertEquals(result, true);

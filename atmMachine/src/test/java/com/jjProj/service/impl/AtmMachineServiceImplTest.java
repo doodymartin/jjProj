@@ -16,20 +16,17 @@ import java.util.ArrayList;
 import org.apache.commons.cli.CommandLine;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.reflect.Whitebox;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.jjProj.service.AtmMachineService;
 import com.jjProj.atmProcessingEngine.AtmEngineFactory;
 import com.jjProj.datamodel.AtmMachineConfig;
+import com.jjProj.service.AtmMachineService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration ({"classpath:Spring-Context.xml"})
@@ -129,9 +126,7 @@ public class AtmMachineServiceImplTest {
     }
 
 /*
- * TODO: need to finish this off
- *
- *
+ * TODO: need to finish this test off
  *
     @Test
     public void testFireThreadPerInputFile() {
