@@ -351,6 +351,11 @@ public class AtmEngineServiceImpl implements AtmEngineService{
      * This method is used to process the Transaction lines that were read in that conatain
      * a particular set of Customer operations.
      *
+     * TODO: Need to clarify the assumption that the overdraft amount should never be included
+     * in the balance amount output i.e. if the user withdraws 10 from an overdraft of 100
+     * the Balance is still 0 but the overdraft is 90 and the output balance is 0 (NOT 90).
+     *
+     *
      * @param List<String> - The list of lines in the transaction
      * @param AtmTransaction - The ATM transaction object
      * @param AtmEngineConfig - The ATM Machine config
