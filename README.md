@@ -141,7 +141,7 @@ This is freeware, no license required.
 ------------------------------------------------------------------------------------------
 Sample commandline output using the commnad line "java -jar atmMachine-1.0-SNAPSHOT.jar"
 -------------------------------------------------------------------------------------------
-C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar\n
+C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar
 INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/input]
 INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/output]
 INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/processed]
