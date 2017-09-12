@@ -137,7 +137,7 @@ against the **ATM_data_test_OK_1.data** file which is the input test data provid
 
 The application currently has a line coverage of **82%** for it's JUnit test cases.
 
-JUnit test faiures will cause the build to fail and stop.  
+JUnit test failures will cause the build to fail and stop.  
 
 -------------------------
 Performance & Profiling 
