@@ -5,7 +5,7 @@ Synopsis
 ----------------------
 The JJ Project is an ATM Machine transaction processing application. The aplication is a **standalone Java jar executable**.
 The application will take one or more ATM transaction processing data files and produce the resultant output.
-The application works by reading in data input file(s) and writing output files with the results of the processing.
+The application works by reading in data input file(s) and writing output file(s) with the results of the processing.
 
 ----------------------
 Installation
@@ -20,7 +20,7 @@ The application processing directrories include the following:
  - **processed** (Where the imput files will be moved once processing is complete)  
 
 Files placed in the output and processed directories will be named with a datestamp with the current date.
-So the input file **ATM_data_test_OK_1.data** will produce the file below in the output and processed directories.
+So the input file **ATM_data_test_OK_1.data** will produce the file below in the output and processed directories.  
 **ATM_data_test_OK_1-20170912.data**
 
 The Applicaiton has only being installed and tested on a Windows 7 environment.
