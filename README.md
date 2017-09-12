@@ -55,7 +55,7 @@ and run the maven build command below. The application's executable jar will be 
 
  - **mvn clean install**
 
-Junit test faiures will cause the build to fail and stop.
+JUnit test failures will cause the build to fail and stop.
 
 -------------------------------------
 Running ATM Machine from command line
@@ -73,9 +73,10 @@ The application will always create the data processing directories below at the 
  
 By default all files with a **.data** extension in the input directory will be considered data input files for processing.
 
-A seperate thread will be used to process each input file. The application will terminate once all processing threads are complete. 
-The output files in the output directory can be taken for inspection. When the application is run there will be some usefull
-outputs to the user console to allow the user to see what that application is doing.
+A separate thread will be created and used to process each input file. The application will terminate once all processing 
+threads are complete. Each input file will produce an output file and the output files are placed into the output directory.
+When the application is run there will be some usefull **INFO** outputs to the user console to allow the user to see 
+what that application is doing.
 
 ----------------------
 Command Line Arguments
@@ -124,17 +125,17 @@ to the processed directory, setting this argument to false leaves the input file
 -------------------------------------------
 Tests / Business requirement Validation
 -------------------------------------------
-The application uses Junit test cases to validate the application.
+The application uses JUnit test cases to validate the application.
 
-Please see the test input data files **/src/test/resources/*.data** in the code base for the Junit test case 
-inputs that validate the application's operation. Junit test cases validate that each test input file produces the required output. 
+Please see the test input data files **/src/test/resources/*.data** in the code base for the JUnit test case 
+inputs that validate the application's operation. JUnit test cases validate that each test input file produces the required output. 
 
-The Junit test case **testprocessInputFile_ATM_data_test_OK_1()** in **AtmEngineServiceImplTest.java** validates the application 
+The JUnit test case **testprocessInputFile_ATM_data_test_OK_1()** in **AtmEngineServiceImplTest.java** validates the application 
 against the **ATM_data_test_OK_1.data** file which is the input test data provided in the requirements specification.
 
-The application currently has a line coverage of **79%** for it's Junit test cases.
+The application currently has a line coverage of **79%** for it's JUnit test cases.
 
-Junit test faiures will cause the build to fail and stop.  
+JUnit test faiures will cause the build to fail and stop.  
 
 -------------------------
 Performance & Profiling 
