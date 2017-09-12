@@ -55,7 +55,8 @@ and run the maven build command below. The application's executable jar will be 
 
  - **mvn clean install**
 
- Junit test faiures will cause the build to fail and stop.  
+Junit test faiures will cause the build to fail and stop.
+
 -------------------------------------
 Running ATM Machine from command line
 -------------------------------------
