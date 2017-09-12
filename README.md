@@ -23,11 +23,16 @@ Files placed in the output and processed directories will be named with a datest
 So the input file **ATM_data_test_OK_1.data** will produce the file below in the output and processed directories.
 **ATM_data_test_OK_1-20170912.data**
 
+The Applicaiton has only being installed and tested on a Windows 7 environment.
+
 -----------------------------------------------
 Supported Deployment/Installation Environment
 ------------------------------------------------
  - Microsoft Windows 7 operating system
  - Java 1.8.0_121
+
+The Applicaiton has only being installed and tested on a Windows 7 environment. The behaviour of some of the
+File operations may differ on other operating systems.
 
 ---------------------------------
 Build Environment
@@ -35,6 +40,8 @@ Build Environment
  - Microsoft Windows 7 operating system
  - Java 1.8.0_121
  - Maven 3.2.5
+
+The Applicaiton has only being built and tested on a Windows 7 environment.
 
 ---------------------------------
 Building the application
