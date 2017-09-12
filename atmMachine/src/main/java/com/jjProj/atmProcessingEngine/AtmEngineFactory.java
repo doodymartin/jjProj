@@ -36,11 +36,13 @@ public class AtmEngineFactory {
      * @param AtmEngineConfig - the config to use in the ATM input file processing
      */
     public void fire(final AtmEngineConfig atmEngineConfig) {
-        taskExecutor.execute( new Runnable() {
-            public void run() {
-                atmEngine.processAtmTransactions(atmEngineConfig);
-            }
-        });
+        /*
+         * Create a new AtmEngine object and set the Configuration into it that
+         * contains the ATM Machine config as well as the specific file that
+         * this thread needs to process.
+         */
+        AtmEngine atmEngine = new AtmEngine(atmEngineConfig);
+        taskExecutor.execute(atmEngine);
     }
 
     public AtmEngine getAtmEngine() {

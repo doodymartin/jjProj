@@ -10,7 +10,7 @@ The application works by reading in data input file(s) and writing output files 
 ----------------------
 Installation
 ----------------------
-Once the application is built the executable jar can be placed in a location when the user wants the application to run.
+Once the application is built, the executable jar can be placed into a location when the user wants the application to run.
 The application will always create the data processing directories from the directory where the application is run from.
 
 The application processing directrories include the following:
@@ -19,6 +19,9 @@ The application processing directrories include the following:
 -processed (Where the imput files will be moved once processing is complete)
 
 Files placed in the output and processed directories will be named with a datestamp with the current date.
+
+So the input file "ATM_data_test_OK_1.data" will procude the file below in the output and processed directories.
+ATM_data_test_OK_1-20170912.data
 
 -----------------------------------------------
 Supported Deployment/Installation Environment
@@ -36,10 +39,10 @@ Maven 3.2.5
 ---------------------------------
 Building the application
 ---------------------------------
-To build the application the user will need access to a Maven repository that has holds  the 3rd party 
-dependencies specified in this README.
+To build the application the user will need access to a Maven repository that has holds the 3rd party 
+dependencies specified in this README below.
 
-To build the application go the the directory where the application's pom.xml is located "jjProj-master\atmMachine\" then run 
+To build the application go the the directory where the application's pom.xml is located "jjProj-master\atmMachine\" and run 
 the maven build command below. The application's executable jar will be produced in the target directory. 
 
 mvn clean install
@@ -48,7 +51,7 @@ mvn clean install
 Running ATM Machine from command line
 -------------------------------------
 To run the application you can use the Java virtual machine to run the executable jar as below. The executable jar can be placed 
-into any directory location where is can create it's own directories and files.
+into any directory location where it has permission to create it's own directories and files.
 
 java -jar atmMachine-1.0-SNAPSHOT.jar
 
@@ -59,10 +62,9 @@ The application will always create the data processing directories below at the 
 
 By default all files with a ".data" extension in the input directory will be considered data input files for processing.
 
-When the application is run there will be some usefull outputs to the user console to allow the 
-user to see what that application is doing. 
-The application will terminate once the processing is complete. The output files in the output directory can be 
-taken for inspection.
+A seperate thread will be used to process each input file. The application will terminate once the processing is complete. 
+The output files in the output directory can be taken for inspection. When the application is run there will be some usefull
+outputs to the user console to allow the user to see what that application is doing.
 
 ----------------------
 Command Line Arguments
@@ -119,7 +121,7 @@ inputs that validate the applacation's operation. Junit test cases validate that
 The Junit test case "testprocessInputFile_ATM_data_test_OK_1()" in "AtmEngineServiceImplTest.java" validates the application 
 against the "ATM_data_test_OK_1.data" file which is the input test data provided in the requirements specification.
 
-The application currently has a line coverage of 78% for it's Junit test cases.
+The application currently has a line coverage of 79% for it's Junit test cases.
 
 -------------------------
 Performance & Profiling 
@@ -130,3 +132,39 @@ Not performed.
 License
 ----------------------------------
 This is freeware, no license required.
+
+------------------------------------------------------------------------------------------
+Sample commandline output using the commnad line "java -jar atmMachine-1.0-SNAPSHOT.jar"
+-------------------------------------------------------------------------------------------
+C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar
+INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/input]
+INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/output]
+INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/processed]
+Sep 12, 2017 10:58:54 AM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4b85612c: startup date [Tue Sep 12 10:58:54 BST 2017]; root of context hierarchy
+Sep 12, 2017 10:58:54 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [Spring-Context.xml]
+Sep 12, 2017 10:58:54 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties
+INFO: Loading properties file from class path resource [atmEngine.properties]
+Sep 12, 2017 10:58:54 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor initialize
+
+INFO: Initializing ExecutorService  'taskExecutor'
+
+INFO: ===============================================================================
+INFO: ATM Machine Running with configuration.....
+INFO: ATM Machine base directory locaiton [C:\jj_proj\jjProj\atmMachine\target]
+INFO: Move input ATM transaction file after procssing [true]
+INFO: Path to single file path to process[null]
+INFO: Max thread pool size[10]
+INFO: Core Thread pool size[5]
+INFO: Active thread count[0]
+INFO: Thread pool size[0]
+INFO: ===============================================================================
+
+INFO: Starting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]
+INFO: Exiting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]
+Sep 12, 2017 10:58:56 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor shutdown
+INFO: Shutting down ExecutorService 'taskExecutor'
+INFO: ATM Machine Stopped.
+
+C:\jj_proj\jjProj\atmMachine\target>

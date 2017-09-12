@@ -168,7 +168,6 @@ public class AtmMachineServiceImpl implements AtmMachineService{
             for (File atmTransactionFile : atmMachineInputDirectory.listFiles(atmMachineFileFilter)) {
                 if (atmTransactionFile.isFile()) {
                     try {
-                        System.out.println("INFO: ATM Machine processing file["+atmTransactionFile.getName()+"]");
                         AtmEngineConfig atmEngineConfig = new AtmEngineConfig(atmMachineConfig,atmTransactionFile.getCanonicalPath());
                         atmEngineFactory.fire(atmEngineConfig);
                     } catch(Exception e){

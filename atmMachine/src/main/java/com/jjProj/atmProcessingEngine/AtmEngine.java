@@ -5,30 +5,45 @@
 ********************************************************************************************************************************/
 package com.jjProj.atmProcessingEngine;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import com.jjProj.datamodel.AtmEngineConfig;
 import com.jjProj.service.AtmEngineService;
+import com.jjProj.service.impl.AtmEngineServiceImpl;
 
 /**
  * ATM Engine Worker Class. An ATM Engine will be created per input file to be processed.
  */
-public class AtmEngine {
+public class AtmEngine implements Runnable {
 
     private AtmEngineConfig atmEngineConfig;
-    @Autowired
+    /**
+     * We cannot use @Autowired here in a Runnable as we are calling the new and not Spring !!
+     * So we setup the AtmEngineService in the constructor
+     */
+//    @Autowired
     private AtmEngineService atmEngineService;
 
     /**
      * Constructor for AtmEngine
      */
     public AtmEngine() {
+        this.setAtmEngineService(new AtmEngineServiceImpl());
     }
     /**
      * Constructor for AtmEngine
      * @param AtmEngineConfig - Define the ATM Machine input data file to be processed
      */
     public AtmEngine(AtmEngineConfig atmEngineConfig){
-        this.atmEngineConfig=atmEngineConfig;
+        this.setAtmEngineConfig(new AtmEngineConfig(atmEngineConfig,atmEngineConfig.getAtmEngineFilePathToProcess()));
+        this.setAtmEngineService(new AtmEngineServiceImpl());
+    }
+
+
+    /**
+     * Run method for this worker thread.
+     *
+     */
+    public void run() {
+        processAtmTransactions(this.getAtmEngineConfig());
     }
 
     /**
@@ -75,4 +90,11 @@ public class AtmEngine {
     public void setAtmEngineConfig(AtmEngineConfig atmEngineConfig) {
         this.atmEngineConfig = atmEngineConfig;
     }
+    public AtmEngineService getAtmEngineService() {
+        return atmEngineService;
+    }
+    public void setAtmEngineService(AtmEngineService atmEngineService) {
+        this.atmEngineService = atmEngineService;
+    }
+
 }
