@@ -135,7 +135,6 @@ public class AtmMachineServiceImpl implements AtmMachineService{
          */
 //        atmDirectoryMaintenance(createAtmDirectoryList(currentDirectoryLocation),AtmDirectoryActionType.DELETE_DIRECTORY);
 
-
         System.out.println( "INFO: ATM Machine Stopped." );
 
         return result;

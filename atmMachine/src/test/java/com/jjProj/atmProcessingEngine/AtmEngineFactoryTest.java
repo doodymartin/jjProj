@@ -12,8 +12,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.reflect.Whitebox;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -74,18 +72,11 @@ public class AtmEngineFactoryTest {
         /**
          * We are just testing the ATMEngineFactory Class so we are not running to actually fire a thread so we mock it out
          */
-        AtmEngine atmEngine = Mockito.mock(AtmEngine.class);
-        Whitebox.setInternalState(atmEngineFactory, "atmEngine", atmEngine);
         atmEngineFactory.fire(atmEngineConfig);
     }
     @Test
     public void testCoverGetterAndSetters() {
-        AtmEngine atmEngine = Mockito.mock(AtmEngine.class);
-
-        atmEngineFactory.setAtmEngine(atmEngine);
         atmEngineFactory.setAtmFactoryName("test name");
-//        atmEngineFactory.setTaskExecutor(taskExecutor);
-        assertNotNull(atmEngineFactory.getAtmEngine());
         assertNotNull(atmEngineFactory.getAtmFactoryName());
         assertNotNull(atmEngineFactory.getFactoryName());
         assertNotNull(atmEngineFactory.getTaskExecutor());

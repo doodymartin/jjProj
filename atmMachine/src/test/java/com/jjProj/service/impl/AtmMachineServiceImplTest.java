@@ -25,6 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.jjProj.atmProcessingEngine.AtmEngineFactory;
+import com.jjProj.common.AtmEngineConstants;
 import com.jjProj.datamodel.AtmMachineConfig;
 import com.jjProj.service.AtmMachineService;
 
@@ -41,7 +42,7 @@ public class AtmMachineServiceImplTest {
     String testProcessedFile;
     String testInFileNormalised;
     File testInFileObject;
-    String extension = ".data";
+    String extension = AtmEngineConstants.ATM_MACHINE_INPUT_FILE_EXTENSION_ID;
     ThreadPoolTaskExecutor executor;
     AtmEngineFactory atmEngineFactory;
 

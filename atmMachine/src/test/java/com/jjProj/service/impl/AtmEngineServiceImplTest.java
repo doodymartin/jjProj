@@ -19,11 +19,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.powermock.reflect.Whitebox;
+
+import com.jjProj.common.AtmEngineConstants;
 import com.jjProj.datamodel.AtmEngineConfig;
 import com.jjProj.datamodel.AtmMachineConfig;
 
@@ -47,8 +50,8 @@ public class AtmEngineServiceImplTest {
     File testOutputFileObject;
     File testProcessedFileObject;
     File testInFileObject;
-    String currentTimeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-    String extension = ".data";
+    String currentTimeStamp = new SimpleDateFormat( AtmEngineConstants.ATM_MACHINE_FILE_TIMESTAMP_ID).format(new Date());
+    String extension =  AtmEngineConstants.ATM_MACHINE_INPUT_FILE_EXTENSION_ID;
     String testDummyInputFile = "dummyInoutFile"+currentCirectory +"\\src\\test\\resources\\Atm_data_test_1_not_exist"+extension;
 
     String testDummyExistingInputFile;

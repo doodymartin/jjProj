@@ -46,7 +46,8 @@ To build the application go the the directory where the application's **pom.xml*
 and run the maven build command below. The application's executable jar will be produced in the target directory. 
 
  - **mvn clean install**
-
+ 
+Junit test faiures will cause the build to fail and stop.  
 -------------------------------------
 Running ATM Machine from command line
 -------------------------------------
@@ -123,6 +124,8 @@ The Junit test case **testprocessInputFile_ATM_data_test_OK_1()** in **AtmEngine
 against the **ATM_data_test_OK_1.data** file which is the input test data provided in the requirements specification.
 
 The application currently has a line coverage of **79%** for it's Junit test cases.
+
+Junit test faiures will cause the build to fail and stop.  
 
 -------------------------
 Performance & Profiling 

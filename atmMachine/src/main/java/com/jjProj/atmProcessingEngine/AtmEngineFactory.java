@@ -15,18 +15,15 @@ public class AtmEngineFactory {
 
     private TaskExecutor taskExecutor;
     private String atmFactoryName;
-    private AtmEngine atmEngine;
 
     /**
      * Constructor for AtmEngineFactory
      *
      * @param TaskExecutor - the thread pool wired in from Spring
-     * @param AtmEngine - the ATM Engine class wired in from Spring
      * @param String - the name of the ATM Machine wired in from properties
      */
-    public AtmEngineFactory(TaskExecutor taskExecutor, AtmEngine atmEngine, String atmFactoryName) {
+    public AtmEngineFactory(TaskExecutor taskExecutor, String atmFactoryName) {
          this.taskExecutor = taskExecutor;
-         this.atmEngine = atmEngine;
          this.atmFactoryName = atmFactoryName;
     }
     /**
@@ -39,18 +36,13 @@ public class AtmEngineFactory {
         /*
          * Create a new AtmEngine object and set the Configuration into it that
          * contains the ATM Machine config as well as the specific file that
-         * this thread needs to process.
+         * this thread needs to process, then give the runnable AtmEngine object
+         * to the taskExecutor.
          */
         AtmEngine atmEngine = new AtmEngine(atmEngineConfig);
         taskExecutor.execute(atmEngine);
     }
 
-    public AtmEngine getAtmEngine() {
-        return atmEngine;
-    }
-    public void setAtmEngine(AtmEngine atmEngine) {
-        this.atmEngine = atmEngine;
-    }
     public TaskExecutor getTaskExecutor() {
         return taskExecutor;
     }

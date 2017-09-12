@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.springframework.stereotype.Service;
 import com.jjProj.common.AtmEngineConstants;
 import com.jjProj.common.AtmMachineError;
 import com.jjProj.datamodel.AtmEngineConfig;
@@ -27,7 +26,6 @@ import com.jjProj.service.AtmEngineService;
  *
  * We annotate this class with @Service so that Spring will pick it up with it's scan on Spring context init.
  */
-@Service
 public class AtmEngineServiceImpl implements AtmEngineService{
 
     private FileReader fileReader = null;
@@ -325,8 +323,6 @@ public class AtmEngineServiceImpl implements AtmEngineService{
             atmEngineConfig.setInputFile(new File(atmEngineConfig.getAtmEngineFilePathToProcess()));
             atmEngineConfig.setOutputFile(outputFileName);
             atmEngineConfig.setProcessedFile(processedFileName);
-        } else{
-            result = false;
         }
         return result;
     }
