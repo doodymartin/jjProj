@@ -54,8 +54,8 @@ To build the application go the the directory where the application's **pom.xml*
 and run the maven build command below. The application's executable jar will be produced in the target directory. 
 
  - **mvn clean install**
- 
-Junit test faiures will cause the build to fail and stop.  
+
+ Junit test faiures will cause the build to fail and stop.  
 -------------------------------------
 Running ATM Machine from command line
 -------------------------------------
