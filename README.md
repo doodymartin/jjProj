@@ -44,7 +44,7 @@ Building the application
 To build the application the user will need access to a **Maven repository** that has holds the 3rd party 
 dependencies specified in this README below.
 
-To build the application go the the directory where the application's pom.xml is located **jjProj-master\atmMachine\** and run 
+To build the application go the the directory where the application's **pom.xml** is located @ jjProj-master\atmMachine\ and run 
 the maven build command below. The application's executable jar will be produced in the target directory. 
 
  - **mvn clean install**
@@ -141,7 +141,7 @@ This is freeware, no license required.
 ------------------------------------------------------------------------------------------
 Sample commandline output using the commnad line "java -jar atmMachine-1.0-SNAPSHOT.jar"
 -------------------------------------------------------------------------------------------
-C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar
+C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar\n
 INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/input]
 INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/output]
 INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/processed]
