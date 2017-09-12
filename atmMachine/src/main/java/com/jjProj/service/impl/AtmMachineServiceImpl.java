@@ -213,7 +213,10 @@ public class AtmMachineServiceImpl implements AtmMachineService{
             } else if (AtmDirectoryActionType.DELETE_DIRECTORY.equals(action) && directory.exists()){
                 directory.delete();
             } else {
-                System.out.println("INFO: No action required for ATM Directory Maintenance action[" + action + "] directory[" + atmDirectory + "]");
+                /**
+                 * TODO wrap in log4j so that we can control logging
+                 */
+//                System.out.println("INFO: No action required for ATM Directory Maintenance action[" + action + "] directory[" + atmDirectory + "]");
             }
         }
         /**
@@ -263,8 +266,11 @@ public class AtmMachineServiceImpl implements AtmMachineService{
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 result = false;
-                System.out.println("ERROR: ATM Machine Thread pool monitor error.");
-                System.out.println(e);
+                /**
+                 * TODO wrap in log4j so that we can control logging
+                 */
+//                System.out.println("ERROR: ATM Machine Thread pool monitor error.");
+//                System.out.println(e);
             }
             if (threadCount == 0) {
                 executor.shutdown();
@@ -325,7 +331,6 @@ public class AtmMachineServiceImpl implements AtmMachineService{
         try {
             cmd = parser.parse(options, args);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             formatter.printHelp("JJ ATM Machine commandline options:", options);
             cmd = null;
         }
@@ -362,7 +367,10 @@ public class AtmMachineServiceImpl implements AtmMachineService{
     public void outputAtmMachineInfo(AtmMachineConfig atmMachineConfig, ThreadPoolTaskExecutor executor){
         /**
          * Provide some startup information to the user on the command line
+         *
+         * TODO wrap in log4j so that we can control logging
          */
+
         System.out.println( "" );
         System.out.println( "INFO: ===============================================================================" );
         System.out.println( "INFO: ATM Machine Running with configuration....." );

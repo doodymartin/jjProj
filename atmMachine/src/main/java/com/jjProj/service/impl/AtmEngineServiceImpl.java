@@ -103,7 +103,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                 readFirstLine = true;
                 linesRead++;
             } catch(NumberFormatException nfe) {
-                System.out.println( "ERROR: Failed to convert first line to an ATM balance for["+atmEngineFilePathToProcess+"]");
+                /**
+                 * TODO wrap in log4j so that we can control logging
+                 */
+//              System.out.println( "ERROR: Failed to convert first line to an ATM balance for["+atmEngineFilePathToProcess+"]");
             }
 
             if (readFirstLine){
@@ -119,7 +122,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                             if(processCustomerAtmTransaction(this.getBufferedWriter(), atmEngineConfig, transactionLines)){
                                 customerTransProcessed++;
                             } else {
-                                System.out.println("ERROR: Failed to process customer transaction in["+atmEngineFilePathToProcess+"]");
+                                /**
+                                 * TODO wrap in log4j so that we can control logging
+                                 */
+//                                System.out.println("ERROR: Failed to process customer transaction in["+atmEngineFilePathToProcess+"]");
                             }
                         }
                         /**
@@ -135,7 +141,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                     if(processCustomerAtmTransaction(this.getBufferedWriter(), atmEngineConfig, transactionLines)){
                         customerTransProcessed++;
                     } else {
-                        System.out.println("ERROR: Failed to process customer transaction in["+atmEngineFilePathToProcess+"]");
+                        /**
+                         * TODO wrap in log4j so that we can control logging
+                         */
+//                        System.out.println("ERROR: Failed to process customer transaction in["+atmEngineFilePathToProcess+"]");
                     }
                     transactionLines.clear();
                 }
@@ -148,8 +157,11 @@ public class AtmEngineServiceImpl implements AtmEngineService{
             }
 
         } catch(Exception e){
-            System.out.println( e);
-            System.out.println( "ERROR: File processing error in ["+atmEngineFilePathToProcess+"] at Line["+linesRead+"]");
+            /**
+             * TODO wrap in log4j so that we can control logging
+             */
+//            System.out.println( e);
+//            System.out.println( "ERROR: File processing error in ["+atmEngineFilePathToProcess+"] at Line["+linesRead+"]");
         } finally{
             /**
              * TODO wrap in log4j so that we can control logging
@@ -169,7 +181,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                     fileWriter.close();
                 }
             } catch(Exception e){
-                System.out.println( "ERROR: Failed to close file ["+atmEngineFilePathToProcess+"] at Line["+linesRead+"]");
+                /**
+                 * TODO wrap in log4j so that we can control logging
+                 */
+//                System.out.println( "ERROR: Failed to close file ["+atmEngineFilePathToProcess+"] at Line["+linesRead+"]");
             }
         }
         return processInputFileSuccess;
@@ -231,19 +246,31 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                         }
 
                     } else {
-                        System.out.println( "ERROR: Invalid Customer Balance amounts in transaction");
+                        /**
+                         * TODO wrap in log4j so that we can control logging
+                         */
+//                        System.out.println( "ERROR: Invalid Customer Balance amounts in transaction");
                         processCustomerAtmTransactionSuccess = false;
                     }
                 } else {
-                    System.out.println( "ERROR: Invalid Customer Balance values["+customerBalance.length+"] in transaction");
+                    /**
+                     * TODO wrap in log4j so that we can control logging
+                     */
+//                    System.out.println( "ERROR: Invalid Customer Balance values["+customerBalance.length+"] in transaction");
                     processCustomerAtmTransactionSuccess = false;
                 }
             } else {
-                System.out.println( "ERROR: Customer PIN did not match");
+                /**
+                 * TODO wrap in log4j so that we can control logging
+                 */
+//                System.out.println( "ERROR: Customer PIN did not match");
                 writeToOutputFile(bufferedWriter, AtmMachineError.ACCOUNT_ERR.toString());
             }
         } else {
-            System.out.println( "ERROR: Invalid Customer Identification values in transaction");
+            /**
+             * TODO wrap in log4j so that we can control logging
+             */
+//            System.out.println( "ERROR: Invalid Customer Identification values in transaction");
             writeToOutputFile(bufferedWriter, AtmMachineError.ACCOUNT_ERR.toString());
         }
         return processCustomerAtmTransactionSuccess;
@@ -341,7 +368,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                 bufferedWriter.flush();
             }
         } catch (Exception e) {
-            System.out.println( "ERROR: Failed to write to output file");
+            /**
+             * TODO wrap in log4j so that we can control logging
+             */
+//            System.out.println( "ERROR: Failed to write to output file");
             return false;
         }
         return true;
@@ -371,7 +401,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                 if (AtmEngineConstants.ATM_CUSTOMER_BALANCE_TRANSACTION_ID.equals(transaction[0])){
                     writeToOutputFile(bufferedWriter, String.valueOf(atmTransaction.getBalanceAmount()));
                 } else {
-                    System.out.println( "ERROR: Customer transction should be a Balance but is not["+transaction[0]+"]");
+                    /**
+                     * TODO wrap in log4j so that we can control logging
+                     */
+//                    System.out.println( "ERROR: Customer transction should be a Balance but is not["+transaction[0]+"]");
                 }
             } else if(transaction.length == 2){
                 if (AtmEngineConstants.ATM_CUSTOMER_WITHDRAWL_TRANSACTION_ID.equals(transaction[0])){
@@ -404,12 +437,21 @@ public class AtmEngineServiceImpl implements AtmEngineService{
                             writeToOutputFile(bufferedWriter, AtmMachineError.ATM_ERR.toString());
                         }
                     } else {
-                        System.out.println( "ERROR: Invalid withdrawal amount in transaction");
+                        /**
+                         * TODO wrap in log4j so that we can control logging
+                         */
+//                        System.out.println( "ERROR: Invalid withdrawal amount in transaction");
                     }
                 } else {
-                    System.out.println( "ERROR: Customer transction should be a Withdrawal but is not ["+transaction[0]+"]");
+                    /**
+                     * TODO wrap in log4j so that we can control logging
+                     */
+//                    System.out.println( "ERROR: Customer transction should be a Withdrawal but is not ["+transaction[0]+"]");
                 }
             }  else {
+                /**
+                 * TODO wrap in log4j so that we can control logging
+                 */
                 System.out.println( "ERROR: Invalid input.");
                 /**
                  * TODO: Should we stop if we detect input file errors.
@@ -438,7 +480,10 @@ public class AtmEngineServiceImpl implements AtmEngineService{
              */
             amount = Integer.parseInt(inputAmount.trim());
         } catch(Exception e) {
-            System.out.println( "ERROR: Failed to validate Customer Amount Balance");
+            /**
+             * TODO wrap in log4j so that we can control logging
+             */
+//            System.out.println( "ERROR: Failed to validate Customer Amount Balance");
             amount = -1;
         }
         return amount;
