@@ -21,7 +21,8 @@ The application processing directrories include the following:
 
 Files placed in the output and processed directories will be named with a datestamp with the current date.
 So the input file **ATM_data_test_OK_1.data** will produce the file below in the output and processed directories.  
-**ATM_data_test_OK_1-20170912.data**
+
+ - **ATM_data_test_OK_1-20170912.data**
 
 The Applicaiton has only being installed and tested on a Windows 7 environment.
 
