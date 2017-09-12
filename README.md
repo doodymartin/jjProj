@@ -14,9 +14,9 @@ Once the application is built, the executable jar can be placed into a location 
 The application will always create the data processing directories from the directory where the application is run from.
 
 The application processing directrories include the following:
--input (where ata input files should be placed for processing)
--output (where output data files will be placed after processing)
--processed (Where the imput files will be moved once processing is complete)
+--input (where ata input files should be placed for processing)
+--output (where output data files will be placed after processing)
+--processed (Where the imput files will be moved once processing is complete)
 
 Files placed in the output and processed directories will be named with a datestamp with the current date.
 
