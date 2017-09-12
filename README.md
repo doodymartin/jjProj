@@ -1,5 +1,5 @@
 README for JJ Project (jjProj) ATM Machine
-
+==========================================
 ----------------------
 Synopsis
 ----------------------
@@ -15,9 +15,11 @@ The application will always create the data processing directories from the dire
 
 The application processing directrories include the following:
 
---input (where ata input files should be placed for processing)
---output (where output data files will be placed after processing)
---processed (Where the imput files will be moved once processing is complete)
+ - **input** (where ata input files should be placed for processing)
+
+ - **output** (where output data files will be placed after processing)
+
+ - **processed** (Where the imput files will be moved once processing is complete)
 
 Files placed in the output and processed directories will be named with a datestamp with the current date.
 
