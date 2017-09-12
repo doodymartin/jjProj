@@ -308,11 +308,7 @@ public class AtmEngineServiceImpl implements AtmEngineService{
         File newFile = new File(atmEngineConfig.getAtmEngineFilePathToProcess());
         if (newFile != null) {
             String processingFileName = newFile.getName().substring(0, newFile.getName().lastIndexOf("."));
-            /**
-             * TODO: Ideally we would put a Date & Time stamp on the file name
-             */
-    //        String currentTimeStamp = new SimpleDateFormat("yyyyMMdd-HH:mm").format(new Date());
-            String currentTimeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
+            String currentTimeStamp = new SimpleDateFormat(AtmEngineConstants.ATM_MACHINE_FILE_TIMESTAMP_ID).format(new Date());
 
             File outputFileName = new File(atmEngineConfig.getAtmMachineBaseDirectory() +
                     "/"+ AtmEngineConstants.ATM_MACHINE_OUTPUT_ID_NAME +

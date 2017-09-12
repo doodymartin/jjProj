@@ -16,16 +16,15 @@ public final class AtmEngineConstants {
     public static final String ATM_MACHINE_FILE_ID_NAME = "file";
 
     public static final String ATM_MACHINE_CLI_INPUT_OPT_ID = "i";
-//    public static final String ATM_MACHINE_CLI_OUTPUT_OPT_ID = "o";
-    //public static final String ATM_MACHINE_CLI_PROCESSED_OPT_ID = "p";
     public static final String ATM_MACHINE_CLI_FILE_OPT_ID = "file";
 
     public static final String ATM_MACHINE_DEFAULT_MOVE_INPUT_FILE_OPT_ID = "true";
-
 
     public static final String ATM_CUSTOMER_BALANCE_TRANSACTION_ID = "B";
     public static final String ATM_CUSTOMER_WITHDRAWL_TRANSACTION_ID = "W";
 
     public static final String ATM_MACHINE_INPUT_FILE_EXTENSION_ID = ".data";
+
+    public static final String ATM_MACHINE_FILE_TIMESTAMP_ID = "yyyyMMdd";
 
 }
