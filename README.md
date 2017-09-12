@@ -44,7 +44,7 @@ Building the application
 To build the application the user will need access to a **Maven repository** that has holds the 3rd party 
 dependencies specified in this README below.
 
-To build the application go the the directory where the application's **pom.xml** is located **@ jjProj-master\atmMachine\ ** 
+To build the application go the the directory where the application's **pom.xml** is located @ jjProj-master\atmMachine\ 
 and run the maven build command below. The application's executable jar will be produced in the target directory. 
 
  - **mvn clean install**
@@ -141,35 +141,35 @@ This is freeware, no license required.
 ------------------------------------------------------------------------------------------
 Sample commandline output using the commnad line "java -jar atmMachine-1.0-SNAPSHOT.jar"
 -------------------------------------------------------------------------------------------
-C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar
-INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/input]
-INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/output]
-INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/processed]
-Sep 12, 2017 10:58:54 AM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh
-INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4b85612c: startup date [Tue Sep 12 10:58:54 BST 2017]; root of context hierarchy
-Sep 12, 2017 10:58:54 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
-INFO: Loading XML bean definitions from class path resource [Spring-Context.xml]
-Sep 12, 2017 10:58:54 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties
-INFO: Loading properties file from class path resource [atmEngine.properties]
-Sep 12, 2017 10:58:54 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor initialize
+C:\jj_proj\jjProj\atmMachine\target>java -jar atmMachine-1.0-SNAPSHOT.jar  
+INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/input]  
+INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/output]  
+INFO: No action required for ATM Directory Maintenance action[CREATE_DIRECTORY] directory[C:\jj_proj\jjProj\atmMachine\target/processed]  
+Sep 12, 2017 10:58:54 AM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh  
+INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4b85612c: startup date [Tue Sep 12 10:58:54 BST 2017]; root of context hierarchy  
+Sep 12, 2017 10:58:54 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions  
+INFO: Loading XML bean definitions from class path resource [Spring-Context.xml]  
+Sep 12, 2017 10:58:54 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties  
+INFO: Loading properties file from class path resource [atmEngine.properties]  
+Sep 12, 2017 10:58:54 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor initialize  
 
-INFO: Initializing ExecutorService  'taskExecutor'
+INFO: Initializing ExecutorService  'taskExecutor'  
 
-INFO: ===============================================================================
-INFO: ATM Machine Running with configuration.....
-INFO: ATM Machine base directory locaiton [C:\jj_proj\jjProj\atmMachine\target]
-INFO: Move input ATM transaction file after procssing [true]
-INFO: Path to single file path to process[null]
-INFO: Max thread pool size[10]
-INFO: Core Thread pool size[5]
-INFO: Active thread count[0]
-INFO: Thread pool size[0]
-INFO: ===============================================================================
+INFO: ===============================================================================  
+INFO: ATM Machine Running with configuration.....  
+INFO: ATM Machine base directory locaiton [C:\jj_proj\jjProj\atmMachine\target]  
+INFO: Move input ATM transaction file after procssing [true]  
+INFO: Path to single file path to process[null]  
+INFO: Max thread pool size[10]  
+INFO: Core Thread pool size[5]  
+INFO: Active thread count[0]  
+INFO: Thread pool size[0]  
+INFO: ===============================================================================  
 
-INFO: Starting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]
-INFO: Exiting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]
-Sep 12, 2017 10:58:56 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor shutdown
-INFO: Shutting down ExecutorService 'taskExecutor'
-INFO: ATM Machine Stopped.
+INFO: Starting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]  
+INFO: Exiting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]  
+Sep 12, 2017 10:58:56 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor shutdown  
+INFO: Shutting down ExecutorService 'taskExecutor'  
+INFO: ATM Machine Stopped.  
 
-C:\jj_proj\jjProj\atmMachine\target>
+C:\jj_proj\jjProj\atmMachine\target>  
