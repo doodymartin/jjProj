@@ -44,8 +44,8 @@ Building the application
 To build the application the user will need access to a **Maven repository** that has holds the 3rd party 
 dependencies specified in this README below.
 
-To build the application go the the directory where the application's **pom.xml** is located @ jjProj-master\atmMachine\ and run 
-the maven build command below. The application's executable jar will be produced in the target directory. 
+To build the application go the the directory where the application's **pom.xml** is located **@ jjProj-master\atmMachine\ ** 
+and run the maven build command below. The application's executable jar will be produced in the target directory. 
 
  - **mvn clean install**
 
