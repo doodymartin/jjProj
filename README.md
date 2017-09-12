@@ -42,7 +42,7 @@ Build Environment
  - Java 1.8.0_121
  - Maven 3.2.5
 
-The Applicaiton has only being built and tested on a Windows 7 environment.
+The Application has only being built and tested on a Windows 7 environment.
 
 ---------------------------------
 Building the application
