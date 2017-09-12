@@ -76,7 +76,7 @@ By default all files with a **.data** extension in the input directory will be c
 A separate thread will be created and used to process each input file. The application will terminate once all processing 
 threads are complete. Each input file will produce an output file and the output files are placed into the output directory.
 When the application is run there will be some usefull **INFO** outputs to the user console to allow the user to see 
-what that application is doing.
+what that application is doing. After processing the input file will moved to the processed directory.
 
 ----------------------
 Command Line Arguments
@@ -84,13 +84,14 @@ Command Line Arguments
 The application has 2 optional commnad line arguments.
 
  - **-file <file name>**
-(optional) Specify Path to single file to process. If this option if specified then the this will be the only file processed
-by the application, any data files in the input directory will not be processed. The file specifies here does not need to be 
-in the input directory.
+(optional) Specify Path to single file to process. If this option if specified then only the file specifed by the argument 
+will be the file processed by the application, any data files in the input directory will be ignored. The file specified with
+this option does not need to be in the input directory.
 
  - **-i <true|false>**
 (optional) Move Input file after processing to the proessed directory. Default is true. By default files will be moved
-to the processed directory, setting this argument to false leaves the input file in place.
+to the processed directory, setting this argument to false leaves the input file in place, so no file is copied or moved 
+to the processed directory.
 
 **Examples:**
  - java -jar atmMachine-1.0-SNAPSHOT.jar
@@ -127,13 +128,14 @@ Tests / Business requirement Validation
 -------------------------------------------
 The application uses JUnit test cases to validate the application.
 
-Please see the test input data files **/src/test/resources/*.data** in the code base for the JUnit test case 
-inputs that validate the application's operation. JUnit test cases validate that each test input file produces the required output. 
+Please see the test input data files **/src/test/resources/*.data** in the code base, these are examples of data input files
+for the application. These files are used in JUnit test cases to validate the application's operation. JUnit test cases 
+validate that each test input file produces the required output. 
 
 The JUnit test case **testprocessInputFile_ATM_data_test_OK_1()** in **AtmEngineServiceImplTest.java** validates the application 
 against the **ATM_data_test_OK_1.data** file which is the input test data provided in the requirements specification.
 
-The application currently has a line coverage of **79%** for it's JUnit test cases.
+The application currently has a line coverage of **82%** for it's JUnit test cases.
 
 JUnit test faiures will cause the build to fail and stop.  
 
@@ -179,6 +181,6 @@ INFO: Starting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\A
 INFO: Exiting Thread[12] processing[C:\jj_proj\jjProj\atmMachine\target\input\ATM_data_test_OK_1.data]  
 Sep 12, 2017 10:58:56 AM org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor shutdown  
 INFO: Shutting down ExecutorService 'taskExecutor'  
-INFO: ATM Machine Stopped.  
+INFO: ATM Machine finished execution successfully.  
 
 C:\jj_proj\jjProj\atmMachine\target>  
