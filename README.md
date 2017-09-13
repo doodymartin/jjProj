@@ -19,7 +19,8 @@ The application processing directrories include the following:
  - **output** (where output data files will be placed after processing)  
  - **processed** (Where the imput files will be moved once processing is complete)  
 
-Files placed in the output and processed directories will be named with a datestamp with the current date.
+Files placed in the output and processed directories will be named with a datestamp with the current date.  
+
 So the input file **ATM_data_test_OK_1.data** will produce the file below in the output and processed directories.  
 
  - **ATM_data_test_OK_1-20170912.data**
