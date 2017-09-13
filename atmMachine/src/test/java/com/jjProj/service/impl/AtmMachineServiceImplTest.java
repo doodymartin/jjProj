@@ -126,26 +126,6 @@ public class AtmMachineServiceImplTest {
         assertEquals(result,true);
     }
 
-/*
- * TODO: need to finish this test off
- *
-    @Test
-    public void testFireThreadPerInputFile() {
-
-        AtmMachineConfig atmMachineConfig = createAtmMachineConfig(currentCirectory,
-                false,
-                null,
-                testInFile);
-
-        AtmEngineFactory atmEngineFactory = Mockito.mock(AtmEngineFactory.class);
-        Whitebox.setInternalState(atmMachineService, "atmEngineFactory", atmEngineFactory);
-
-        boolean result = atmMachineService.fireThreadPerInputFile(atmEngineFactory,atmMachineConfig);
-        assertEquals(result,true);
-    }
-*/
-
-
     private AtmMachineConfig createAtmMachineConfig(String atmMachineBaseDirectory,
             boolean cleanInputAtmTransactionFile,
             String singleFilePathForProcessing,
@@ -158,7 +138,7 @@ public class AtmMachineServiceImplTest {
     }
 
 
-/* TODO: Need to cover the following classes
+/* TODO: Need to cover the following methods
  *
     public boolean atmMachineInstance(String[] args);
     public boolean fireThreadPerInputFile(AtmEngineFactory atmEngineFactory, AtmMachineConfig atmMachineConfig);
