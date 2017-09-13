@@ -1,5 +1,14 @@
 README for JJ Project (jjProj) ATM Machine
 ==========================================
+
+-------
+Version
+-------
+The latest application version is below.
+
+ - **1.0-SNAPSHOT**
+
+
 ----------------------
 Synopsis
 ----------------------
