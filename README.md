@@ -25,7 +25,7 @@ So the input file **ATM_data_test_OK_1.data** will produce the file below in the
 
  - **ATM_data_test_OK_1-20170912.data**
 
-The Applicaiton has only being installed and tested on a Windows 7 environment.
+The Application has only being installed and tested on a Windows 7 environment.
 
 -----------------------------------------------
 Supported Deployment/Installation Environment
